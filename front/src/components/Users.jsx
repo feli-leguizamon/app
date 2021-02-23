@@ -1,10 +1,10 @@
 import React from "react";
 
-export default ({ todosLosUsers, singleUserMethod }) => (
+export default ({ users, singleUserMethod }) => (
   <div>
     <h1>USERS</h1>
-    {todosLosUsers.map((user) => {
-      return <h4><button onClick = {() => singleUserMethod(user.id)}>{user.name}</button></h4>;
+    {users.map((user) => {
+      return <h4><button onClick={() => singleUserMethod(user.id)}>{user.name}</button></h4>;
     })}
   </div>
 );

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.12.17",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "axios": "^0.21.1",

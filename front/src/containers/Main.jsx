@@ -1,98 +1,92 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Users from "../components/Users";
 import SingleUser from "../components/SingleUser";
+import Cars from "../components/Cars";
+import SingleCar from "../components/SingleCar";
 
-// antes de ocupar axios, ocupaba el arreglo fakeAlbums.
+export default function Main() {
+  const [users, setUsers] = useState([]);
+  const [singleUser, setSingleUser] = useState({});
+  const [cars, setCars] = useState([]);
+  const [singleCar, setSingleCar] = useState({});
+  const [value, setValue] = useState([]);
+  const [userValue, setUserValue] = useState(null)
 
-class Main extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      users: [],
-      user: {}
-    };
-
-    this.deselectUser = this.deselectUser.bind(this)
-    this.singleUserMethod = this.singleUserMethod.bind(this)
-  }
-/* /api/users */
-  componentDidMount() {
-    axios.get("/api/users")
-    .then((res) => res.data)
-    .then((serverUsers) => this.setState({users: serverUsers}) )
-  }
-/* /api/users/1 */
-
-  singleUserMethod(userId) {
-    axios.get(`/api/users/${userId}`)
-    .then((res) => res.data)
-    .then((serverUser) => this.setState({user: serverUser}))
-  }
-
-  deselectUser() {
-    this.setState({
-      user: {}
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        {
-          this.state.user.id ? 
-          <SingleUser singleUser = {this.state.user} deselectUser = {this.deselectUser}/> :
-          <Users todosLosUsers = {this.state.users} singleUserMethod = {this.singleUserMethod} />
-        }
-      </div>
-    );
-  }
-}
-
-export default Main;
-
-/* class Main extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      users: [],
-      singleUser: {}
-    }
-
-    this.singleUserMethod = this.singleUserMethod.bind(this)
-    this.deselectUser = this.deselectUser.bind(this)
-  }
-
-  componentDidMount() {
-    axios.get("/api/users")
-    .then((res) => res.data)
-    .then((serverUsers) => this.setState({users: serverUsers}))
-  }
-
-  singleUserMethod(userId) {
+  useEffect(() => {
     axios
-    .get(`/api/users/${userId}`)
-    .then((res) => res.data)
-    .then((singleUserServer) => this.setState({singleUser: singleUserServer}))
+      .get("/api/users")
+      .then((res) => res.data)
+      .then((serverUsers) => setUsers(serverUsers));
+
+    axios
+      .get("/api/cars")
+      .then((res) => res.data)
+      .then((serverCars) => setCars(serverCars));
+  }, []);
+
+  const singleUserMethod = (userId) => {
+    axios
+      .get(`/api/users/${userId}`)
+      .then((res) => res.data)
+      .then((serverUser) => setSingleUser(serverUser));
+  };
+
+  const deselectUser = () => {
+    setSingleUser({});
+  };
+
+  const deselectCar = () => {
+    setSingleCar({});
+  };
+
+  const singleCarMethod = (carId) => {
+    axios
+      .get(`/api/cars/${carId}`)
+      .then((res) => res.data)
+      .then((serverCar) => setSingleCar(serverCar));
+  };
+
+  const handleChangeMarca = (e) => {
+    let evento = e.target.value;
+    setValue(evento);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/cars", { marca: value, userValue })
+      .then((res) => res.data)
+      .then((createdCar) => setCars([...cars, createdCar]));
+  };
+
+  const handleChangeUser = (e) => {
+    let evento = e.target.value
+    setUserValue(evento)
   }
 
-  deselectUser() {
-    this.setState({singleUser: {}})
-  }
+  return (
+    <div>
+      {singleUser.id ? (
+        <SingleUser singleUser={singleUser} deselectUser={deselectUser} />
+      ) : (
+        <>
+          <Users users={users} singleUserMethod={singleUserMethod} />
+        </>
+      )}
 
-  render() {
-    return (
-        <div>
-          {
-            this.state.singleUser.id ? 
-            <SingleUser singleUser = {this.state.singleUser} deselectUser = {this.deselectUser}/> 
-            : 
-            <Users users = {this.state.users} singleUserMethod = {this.singleUserMethod} />
-          }
-
-        </div>
-    );
-  }
+      {singleCar.id ? (
+        <SingleCar singleCar={singleCar} deselectCar={deselectCar} />
+      ) : (
+        <Cars
+          cars={cars}
+          singleCarMethod={singleCarMethod}
+          handleChangeMarca={handleChangeMarca}
+            handleSubmit={handleSubmit}
+            users={users}
+            handleChangeUser = {handleChangeUser}
+        />
+      )}
+    </div>
+  );
 }
-
-export default Main; */
