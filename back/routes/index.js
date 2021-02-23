@@ -41,7 +41,7 @@ router.post("/cars", (req, res) => {
 });
 
 router.get("/cars/:id", (req, res, next) => {
-  Car.findByPk(req.params.id)
+  Car.findByPk(req.params.id, {include: User})
     .then((car) => res.send(car))
     .catch((e) => console.log(e));
 });
