@@ -1,7 +1,7 @@
-const Car = require("./Car")
-const User = require("./User")
+const City = require("./City");
+const User = require("./User");
 
-Car.belongsTo(User)
-User.hasMany(Car)
+User.belongsTo(City);
+City.hasMany(User);
 
-module.exports = {Car, User}
+module.exports = { City, User };

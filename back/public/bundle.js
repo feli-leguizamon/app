@@ -32168,75 +32168,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/components/Cars.jsx":
-/*!*********************************!*\
-  !*** ./src/components/Cars.jsx ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Car; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function Car(_ref) {
-  var cars = _ref.cars,
-      singleCarMethod = _ref.singleCarMethod,
-      handleSubmit = _ref.handleSubmit,
-      handleChangeMarca = _ref.handleChangeMarca,
-      users = _ref.users,
-      handleChangeUser = _ref.handleChangeUser;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "CARS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: handleSubmit
-  }, "Marca: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: handleChangeMarca
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "users"
-  }, "Elegi un usuario:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-    id: "users",
-    onChange: handleChangeUser
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), users.length && users.map(function (user) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-      value: user.id
-    }, user.name);
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit"
-  }, "ENVIAR")), cars.length > 0 && cars.map(function (car) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: function onClick() {
-        return singleCarMethod(car.id);
-      }
-    }, car.marca));
-  }));
-}
-
-/***/ }),
-
-/***/ "./src/components/SingleCar.jsx":
-/*!**************************************!*\
-  !*** ./src/components/SingleCar.jsx ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SingleCar; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function SingleCar(_ref) {
-  var singleCar = _ref.singleCar,
-      deselectCar = _ref.deselectCar;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Single Car"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "DUE\xD1O: ", singleCar.user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleCar.marca), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: deselectCar
-  }, "Volver a home"));
-}
-
-/***/ }),
-
 /***/ "./src/components/SingleUser.jsx":
 /*!***************************************!*\
   !*** ./src/components/SingleUser.jsx ***!
@@ -32246,27 +32177,159 @@ function SingleCar(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var SingleUser = function SingleUser(_ref) {
   var singleUser = _ref.singleUser,
       deselectUser = _ref.deselectUser;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Single User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, singleUser.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "My cars"), singleUser.cars.length > 0 && singleUser.cars.map(function (car) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, car.marca);
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: deselectUser
-  }, "Volver a users"));
-});
-/* export default ({singleUser, deselectUser}) => (
 
-    <div>
-        <h1>Single User</h1>
-        <h4>{singleUser.name}</h4>
-        <button onClick = {deselectUser}>Volver a users</button>
-    </div>
-)
- */
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      _boolean = _useState2[0],
+      setBoolean = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cities = _useState4[0],
+      setCities = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      name = _useState6[0],
+      setName = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      lastname = _useState8[0],
+      setLastname = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      birthday = _useState10[0],
+      setBirthday = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      city = _useState12[0],
+      setCity = _useState12[1];
+
+  var handleChangeName = function handleChangeName(e) {
+    setName(e.target.value);
+  };
+
+  var handleChangeLastname = function handleChangeLastname(e) {
+    setLastname(e.target.value);
+  };
+
+  var handleChangeBirthday = function handleChangeBirthday(e) {
+    setBirthday(e.target.value);
+  };
+
+  var handleChangeCity = function handleChangeCity(e) {
+    setCity(e.target.value);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/city").then(function (r) {
+      return r.data;
+    }).then(function (cities) {
+      return setCities(cities);
+    });
+  }, []);
+
+  var deleteUser = function deleteUser(id) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(id)).then(function () {
+      return console.log("usuario eliminado");
+    });
+  };
+
+  var updateUser = function updateUser(id) {
+    setBoolean(true);
+  };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/users/".concat(singleUser.id), {
+      name: name,
+      lastname: lastname,
+      birthday: birthday,
+      cityId: city
+    }).then(function () {
+      return console.log("usuario actualizado");
+    });
+    setBoolean(false);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+    className: "users--title"
+  }, "Single User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+    className: "users--data"
+  }, singleUser.name, " ", singleUser.lastname, " - ", singleUser.birthday), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "city--data"
+  }, "City: ", singleUser.city.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
+    className: "city--data"
+  }, "Description: ", singleUser.city.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "buttons--singleUser"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: deselectUser
+  }, "Back to main page")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "buttons--singleUser"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: function onClick(id) {
+      return updateUser(singleUser.id);
+    }
+  }, "Update user")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "buttons--singleUser"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: function onClick(id) {
+      return deleteUser(singleUser.id);
+    }
+  }, "Delete user")), _boolean ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form--container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input--form"
+  }, "NAME: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    onChange: handleChangeName
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "LASTNAME: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    onChange: handleChangeLastname
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "BIRTHDAY: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    onChange: handleChangeBirthday
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    "for": "cities"
+  }, "CHOOSE A CITY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    id: "cities",
+    onChange: handleChangeCity
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), cities.length && cities.map(function (city) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: city.id
+    }, city.name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button--send"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit"
+  }, "SEND")))) : "");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SingleUser);
 
 /***/ }),
 
@@ -32281,52 +32344,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var users = _ref.users,
-      singleUserMethod = _ref.singleUserMethod;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "USERS"), users.map(function (user) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: function onClick() {
-        return singleUserMethod(user.id);
-      }
-    }, user.name));
-  }));
-});
-/* 
-    import React from "react";
-
-export default ({users, singleUserMethod}) => (
-    <div>
-        <h1>USERS</h1>
-        {
-            users.map((user) => (
-                <h4><button onClick = {() => singleUserMethod(user.id) }>{user.name}</button></h4>
-            ))
-        }
-    </div>
-    ) */
-
-/***/ }),
-
-/***/ "./src/containers/Main.jsx":
-/*!*********************************!*\
-  !*** ./src/containers/Main.jsx ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Main; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Users */ "./src/components/Users.jsx");
-/* harmony import */ var _components_SingleUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/SingleUser */ "./src/components/SingleUser.jsx");
-/* harmony import */ var _components_Cars__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Cars */ "./src/components/Cars.jsx");
-/* harmony import */ var _components_SingleCar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/SingleCar */ "./src/components/SingleCar.jsx");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -32350,52 +32369,174 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var Users = function Users(_ref) {
+  var singleUserMethod = _ref.singleUserMethod;
 
-
-
-function Main() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      users = _useState2[0],
-      setUsers = _useState2[1];
+      cities = _useState2[0],
+      setCities = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
-      singleUser = _useState4[0],
-      setSingleUser = _useState4[1];
+      name = _useState4[0],
+      setName = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      cars = _useState6[0],
-      setCars = _useState6[1];
+      lastname = _useState6[0],
+      setLastname = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      singleCar = _useState8[0],
-      setSingleCar = _useState8[1];
+      birthday = _useState8[0],
+      setBirthday = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      value = _useState10[0],
-      setValue = _useState10[1];
+      city = _useState10[0],
+      setCity = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      userValue = _useState12[0],
-      setUserValue = _useState12[1];
+      users = _useState12[0],
+      setUsers = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      _boolean = _useState14[0],
+      setBoolean = _useState14[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/users").then(function (res) {
-      return res.data;
-    }).then(function (serverUsers) {
-      return setUsers(serverUsers);
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/city").then(function (r) {
+      return r.data;
+    }).then(function (cities) {
+      return setCities(cities);
     });
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cars").then(function (res) {
-      return res.data;
-    }).then(function (serverCars) {
-      return setCars(serverCars);
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/users").then(function (r) {
+      return r.data;
+    }).then(function (users) {
+      return setUsers(users);
     });
   }, []);
+
+  var handleChangeName = function handleChangeName(e) {
+    setName(e.target.value);
+  };
+
+  var handleChangeLastname = function handleChangeLastname(e) {
+    setLastname(e.target.value);
+  };
+
+  var handleChangeBirthday = function handleChangeBirthday(e) {
+    setBirthday(e.target.value);
+  };
+
+  var handleChangeCity = function handleChangeCity(e) {
+    setCity(e.target.value);
+  };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/users", {
+      name: name,
+      lastname: lastname,
+      birthday: birthday,
+      cityId: city
+    }).then(function (user) {
+      return setUsers([].concat(_toConsumableArray(users), [user.data]));
+    });
+    setBoolean(false);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "users--title"
+  }, "USERS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "div--createNewUser"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button--createNewUser",
+    onClick: function onClick() {
+      return setBoolean(true);
+    }
+  }, "Create new user")), users.map(function (user) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      className: "users--name"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "button--singleUser blue",
+      onClick: function onClick() {
+        return singleUserMethod(user.id);
+      }
+    }, user.name));
+  }), _boolean ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form--container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "NAME:", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    onChange: handleChangeName,
+    className: "form--input"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "LASTNAME:", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    onChange: handleChangeLastname,
+    className: "form--input"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "BIRTHDAY:", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    onChange: handleChangeBirthday,
+    className: "form--input"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": "cities"
+  }, "CHOOSE A CITY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    id: "cities",
+    onChange: handleChangeCity
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), cities.length && cities.map(function (city) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: city.id
+    }, city.name);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "button--send"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit"
+  }, "SEND")))) : null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Users);
+
+/***/ }),
+
+/***/ "./src/containers/Main.jsx":
+/*!*********************************!*\
+  !*** ./src/containers/Main.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Users */ "./src/components/Users.jsx");
+/* harmony import */ var _components_SingleUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/SingleUser */ "./src/components/SingleUser.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var Main = function Main() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      singleUser = _useState2[0],
+      setSingleUser = _useState2[1];
 
   var singleUserMethod = function singleUserMethod(userId) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/users/".concat(userId)).then(function (res) {
@@ -32409,58 +32550,15 @@ function Main() {
     setSingleUser({});
   };
 
-  var deselectCar = function deselectCar() {
-    setSingleCar({});
-  };
-
-  var singleCarMethod = function singleCarMethod(carId) {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cars/".concat(carId)).then(function (res) {
-      return res.data;
-    }).then(function (serverCar) {
-      return setSingleCar(serverCar);
-    });
-  };
-
-  var handleChangeMarca = function handleChangeMarca(e) {
-    var evento = e.target.value;
-    setValue(evento);
-  };
-
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cars", {
-      marca: value,
-      userValue: userValue
-    }).then(function (res) {
-      return res.data;
-    }).then(function (createdCar) {
-      return setCars([].concat(_toConsumableArray(cars), [createdCar]));
-    });
-  };
-
-  var handleChangeUser = function handleChangeUser(e) {
-    var evento = e.target.value;
-    setUserValue(evento);
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, singleUser.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SingleUser__WEBPACK_IMPORTED_MODULE_3__["default"], {
     singleUser: singleUser,
     deselectUser: deselectUser
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Users__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    users: users,
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Users__WEBPACK_IMPORTED_MODULE_2__["default"], {
     singleUserMethod: singleUserMethod
-  })), singleCar.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SingleCar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    singleCar: singleCar,
-    deselectCar: deselectCar
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Cars__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    cars: cars,
-    singleCarMethod: singleCarMethod,
-    handleChangeMarca: handleChangeMarca,
-    handleSubmit: handleSubmit,
-    users: users,
-    handleChangeUser: handleChangeUser
   }));
-}
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Main);
 
 /***/ }),
 
@@ -32480,7 +32578,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/Main */ "./src/containers/Main.jsx");
 
 
- // renderiza el componente Main en el div app 
+ // renderiza el componente Main en el div app
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_Main__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("app"));
 
